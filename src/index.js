@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Provider} from 'react-redux';
+import store from './stateManager/redux/AuthenticationState/store/authStore';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <React.Fragment>
+      <Provider store={store}>
+         <App />
+       </Provider>
+    </React.Fragment>,
   document.getElementById('root')
 );
 

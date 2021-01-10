@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React  from 'react';
 import './App.css';
+import Appbar from './components/Appbar';
+import {BrowserRouter as Router , Route , Switch   } from 'react-router-dom';
+import SignIn from './pages/SignIn';
+import Dashboard from './pages/Dashboard/MainDashboard';
+import Products from './pages/product/Product';
+import Orders from './pages/orders/Orders';
+import SignUp from './pages/SignUp';
+import PrivateRoutes from './hoc/PrivateRoutes';
+import Drawer from './components/assets/Drawer';
+import Category from './pages/Category/Category';
+
+
+
 
 function App() {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+       <Router>
+         <div className="App">
+
+             <div className="row">
+                <div className="col-sm-12">
+                   <Appbar />
+                </div>
+             </div>
+             <div className="row">
+                <div className="col-2 sidebar">
+                   <Drawer />
+                </div>
+                <div className="col-10 main">
+                  <Switch> 
+                    <PrivateRoutes exact path="/" component={Dashboard}/>
+                    <PrivateRoutes path="/Products" component={Products}/>
+                    <PrivateRoutes path="/Orders" component={Orders}/>
+                    <PrivateRoutes path="/Category" component={Category}/>
+                    <Route path="/SignIn" component={SignIn} />
+                    <Route path="/SignUp" component={SignUp} /> 
+                  </Switch> 
+                </div>
+             </div> 
+          </div>
+       </Router> 
   );
 }
 
